@@ -18,7 +18,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     double rotate=0;
     //all attributes taken from animgleventlistener
     String[] textureNames = {"Road.png" ,"RaceLines1.png","GrassBackground.png","Start.png"
-            ,"CarD0.png","Soil_Tile.png","RaceLines.png" 
+            ,"CarD0.png","Soil_Tile.png","RaceLines.png" ,"Bush.png","Rock.png","Tree.png"
     };
     /*
 
@@ -29,6 +29,9 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     Our Red Car(100% Health): 4
     Soil_Tile(map to add) : 5
     RaceLines: 6
+    Bush: 7
+    Rock: 8
+    Tree: 9
 
 
 
@@ -82,6 +85,8 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         Grass(gl);
         WhiteLines(gl);//Created by Mohamed Magdy , idea by:all Teammates , First Touch:Abdulrahman
         theSideLines(gl);//Created by Abdelrahman ,Idea by: By All Teammates
+        Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
+        Rock(gl);
         Start(gl); // Created By : All teammates (so easy)
         Car(gl); // From Initial Project
 
@@ -89,14 +94,21 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     }
     double[] y1={0};
     double speed=0.5;
-   
+    double[] Rock_movement = {0};
+    double[] Bush_movement = {0};
 
+    public void Tree(GL gl){
+        Movement(gl, 3, 88, 9, 1f, 1f, 1.5, 100, 70, 12, Rock_movement);
+    }
 
+    public void Rock(GL gl){
+        Movement(gl, 3, 88, 8, 1f, 1f, 1.5, 100, 50, 12, Bush_movement);
+    }
     public void Grass(GL gl){
         Movement(gl,2,88,2,1.5f,25f,speed,100,50,12,y1);
     }
     public void WhiteLines(GL gl) {
-       Movement(gl,30,60,1,0.2f,1.3f,speed,100,50,12,y1);
+        Movement(gl,30,60,1,0.2f,1.3f,speed,100,50,12,y1);
     }
     public void theSideLines(GL gl) {
         Movement(gl,10,80,6,0.2f,11f,speed,100,50,12,y1);

@@ -20,6 +20,7 @@ public class ResourceRetriever {
         } else {
             return url;
         }
+
     }
 
     public static InputStream getResourceAsStream(final String filename) throws IOException {

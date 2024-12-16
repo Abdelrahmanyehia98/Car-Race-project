@@ -331,7 +331,10 @@ left up (354,884)
                 DrawSprite(gl,45,70,27,10f,10f);
                 //by Eslam Rasmy
             }
+<<<<<<< HEAD
             if(blueY>0) blueY-=1;
+=======
+>>>>>>> de6fdf0d51f4a6980a5132f28fdb67e674b50fe3
         }
         else isBarrelCollisionActiveBlue = false;
 

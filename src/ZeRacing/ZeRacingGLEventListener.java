@@ -15,16 +15,22 @@ import javax.media.opengl.glu.GLU;
 public class ZeRacingGLEventListener extends ZeRacingListener {
     int maxWidth = 100;
     int maxHeight = 100;
-    int x = 70, y = 7; // x is in middle of screen(edited)
+    double x = 70, y = 7; // x is in middle of screen(edited)
     int blueX = 20, blueY = 7; // x is in middle of screen(edited)
     double rotate = 0;
     double rotateB = 0;
-    int randomNumber;
+    int randomNumberForSwallow;
+    int randomNumberForHP;
+    int randomNumberForNitro;
+
 
     //all attributes taken from animgleventlistener
     String[] textureNames = {"Road.png", "RaceLines1.png", "GrassBackground.png", "Start.png"
-            , "CarD0.png", "Soil_Tile.png", "RaceLines.png", "Bush.png", "Rock.png", "Tree.png"
-            , "Barrel.png", "Oil.png", "BlueD0.png", "CarD1.png", "CarD2.png", "CarD3.png", "CarD4.png"
+            ,"Bush.png", "Soil_Tile.png", "RaceLines.png", "Bush.png", "Rock.png", "Tree.png"
+            , "Barrel.png", "Oil.png",
+            "BlueD0.png","BlueD1.png","BlueD2.png","BlueD3.png","BlueD4.png"
+            ,"CarD0.png","CarD1.png","CarD2.png","CarD3.png","CarD4.png"
+            ,"HP_Bonus.png","Nitro.png"
     };
     /*
 
@@ -32,7 +38,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     WhiteLines: 1
     GrassBackground: 2
     Start:3
-    Our Red Car(100% Health): 4
+
     Soil_Tile(map to add) : 5
     RaceLines: 6
     Bush: 7
@@ -40,7 +46,20 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     Tree: 9
     Barrel:10
     Oil: 11
-    blue car:12
+    blue car(100%):12
+    blue car(80%):13
+    blue car(60%):14
+    blue car(40%):15
+    blue car(20%):16
+
+    red car(100%):17
+    red car(80%):18
+    red car(60%):19
+    red car(40%):20
+    red car(20%):21
+
+    HP_Bonus:22
+    Nitro:23
 
 
 
@@ -80,7 +99,9 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
                 e.printStackTrace();
             }
         }
-        randomNumber = (int) (Math.random() * (40)) + 20;
+        randomNumberForSwallow = (int) (Math.random() * (40)) + 20;
+        randomNumberForHP = (int) (Math.random() * (40)) + 20;
+        randomNumberForNitro = (int) (Math.random() * (40)) + 20;
     }
 
     /*
@@ -88,13 +109,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     -we need to decrease road image size
      */
     double timer = 0;
-
-    double[] y1 = {0};
-    double speed = 0.5;
-    double speedBarrel = 1.5;
-    double[] Rock_movement = {500};
-    double[] Tree_movement = {2000}; // 14 second , khaled count it
-    double[] Barrel_Movement = {0};
 
     public void display(GLAutoDrawable gld) {
         GL gl = gld.getGL();
@@ -106,47 +120,81 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         WhiteLines(gl);//Created by Mohamed Magdy , idea by:all Teammates , First Touch:Abdulrahman
         theSideLines(gl);//Created by Abdelrahman ,Idea by: By All Teammates
         Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
-        Rock(gl);
+//        Rock(gl);
         Barrel(gl);
         Start(gl); // Created By : All teammates (so easy)
         Car(gl); // From Initial Project
-        CarBlue(gl);
-        timer += 0.5;
-        if (Barrel_Movement[0] == -134) System.out.println("hamo");
-        System.out.println(Barrel_Movement[0]);
+        CarBlue(gl); // Created by : Magdy alone and From my Perspective it's prefect //Hazem
+//        IncreaseSpeed();
 
+        System.out.println(timer += 0.5);
 
     }
-    //Random index between 20,70
-    // 0 < Math.random() <= 1 ---> 20 <= Math.random() <= 70
+
+    double[] y1 = {0};
+    double[] speed = {0.49};
+    double[] speed_for_rock={(speed[0]*(0.269/speed[0]))};
+    double[] Rock_movement = {500};
+    double[] Tree_movement = {2000}; // 14 second , khaled count it
+    //Finish Line ---> 12858
+    double[] Barrel_Movement = {250};
+
+    boolean isBarrelCollisionActiveRed = false;
+    boolean isBarrelCollisionActiveBlue=false;
+    int Car_Red_Index=17;
+    int Car_Blue_Index=12;
 
     public void Barrel(GL gl) {
-        Movement_For_Barrel(gl, randomNumber, 10, 1f, 1f, speedBarrel, 150, 700, 20, Barrel_Movement);
-        if (timer % 200 == 0) randomNumber = (int) (Math.random() * (50)) + 20;
+        Movement_For_Obstacles(gl, randomNumberForSwallow, 10, 1f, 1f, speed[0]+1, 100, 700, 20, Barrel_Movement);
+        if(isColliding(randomNumberForSwallow,((int)Barrel_Movement[0]+100),10,10,x,y,10,10)) {
+            if (!isBarrelCollisionActiveRed && Car_Red_Index < 21) {
+                Car_Red_Index++;
+                isBarrelCollisionActiveRed = true;
+            }
+        }
+        else isBarrelCollisionActiveRed = false;
 
+        if(isColliding(randomNumberForSwallow,(int)(Barrel_Movement[0]+80),10,10,blueX,blueY,10,10)) {
+            if (!isBarrelCollisionActiveBlue && Car_Blue_Index < 16) {
+                Car_Blue_Index++;
+                isBarrelCollisionActiveBlue = true;
+            }
+        }
+        else isBarrelCollisionActiveBlue = false;
+
+        if (timer % 500 == 0) randomNumberForSwallow = (int) (Math.random() * (50)) + 20;
     }
 
+    //DRY : don't repeat ur self
+    //RY
+
+    public boolean isColliding(double x1, double y1, double width1, double height1, double x2, double y2, double width2, double height2) {
+        return x1 < x2 + width2 &&
+                x1 + width1 > x2 &&
+                y1 < y2 + height2 &&
+                y1 + height1 > y2;
+    }
     public void Tree(GL gl) {
-        Movement(gl, 3, 88, 9, 1f, 1f, 1.5, 100, 70, 12, Tree_movement);
+        Movement(gl, 3, 88, 9, 1f, 1f,  speed[0]+1, 100, 70, 12, Tree_movement);
     }
 
     public void Rock(GL gl) {
-        Movement_For_Rock(gl, 3, 88, 8, 1f, 1f, 1.5, 100, 50, 12, Rock_movement, 390);
+        Movement_For_Rock(gl, 3, 88, 8, 1f, 1f,  speed_for_rock[0], 100, 50, 12, Rock_movement, 390);
     }
 
     public void Grass(GL gl) {
-        Movement(gl, 2, 88, 2, 1.5f, 25f, speed, 100, 50, 12, y1);
+        Movement(gl, 2, 88, 2, 1.5f, 25f,   speed[0], 100, 50, 20, y1);
     }
 
     public void WhiteLines(GL gl) {
-        Movement(gl, 30, 60, 1, 0.2f, 1.3f, speed, 100, 50, 12, y1);
+        Movement(gl, 30, 60, 1, 0.2f, 1.3f,   speed[0], 100, 50, 12, y1);
     }
 
     public void theSideLines(GL gl) {
-        Movement(gl, 10, 80, 6, 0.2f, 11f, speed, 100, 50, 12, y1);
+        Movement(gl, 10, 80, 6, 0.2f, 11f,   speed[0], 100, 50, 12, y1);
     }
 
-    public void Movement(GL gl, int x1, int x2, int index, float scaleX, float scaleY, double speed, int Y_initial, int sp, int noOfLines, double[] y1) {
+    public void Movement(GL gl, double x1, double x2, int index, float scaleX, float scaleY, double speed, int Y_initial, int sp, int noOfLines, double[] y1) {
         for (int i = 0; i < noOfLines; i++) {
             double currentY = Y_initial - (i * sp) + y1[0]; // currentY =100 , y1[0] =0
             DrawSprite(gl, x1, (int) currentY, index, scaleX, scaleY);
@@ -159,7 +207,8 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     }
 
     //DRY : Don't repeat your self
-    public void Movement_For_Barrel(GL gl, int x1, int index, float scaleX, float scaleY, double speed, int Y_initial, int sp, int noOfLines, double[] y1) {
+
+    public void Movement_For_Obstacles(GL gl, double x1, int index, float scaleX, float scaleY, double speed, int Y_initial, int sp, int noOfLines, double[] y1) {
         for (int i = 0; i < noOfLines; i++) {
             double currentY = Y_initial - (i * sp) + y1[0]; // currentY =100 , y1[0] =0
             DrawSprite(gl, x1, (int) currentY, index, scaleX, scaleY);
@@ -170,7 +219,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         }
     }
 
-    public void Movement_For_Rock(GL gl, int x1, int x2, int index, float scaleX, float scaleY, double speed, int Y_initial, int sp, int noOfLines, double[] y1, int max) {
+    public void Movement_For_Rock(GL gl, double x1, double x2, int index, float scaleX, float scaleY, double speed, int Y_initial, int sp, int noOfLines, double[] y1, int max) {
         for (int i = 0; i < noOfLines; i++) {
             double currentY = Y_initial - (i * sp) + y1[0]; // currentY =100 , y1[0] =0
             DrawSprite(gl, x1, (int) currentY, index, scaleX, scaleY);
@@ -195,19 +244,14 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         DrawSprite(gl, 45, 7, 3, 7f, 3f);
         gl.glPopMatrix();
     }
-
     public void Car(GL gl) {
         handleKeyPress();
-        if (Barrel_Movement[0] == -124 /*&& randomNumber == x*/) {
-            //animationIndex++ in car
-            System.out.println("colides");
-        }
-        DrawSprite_Car(gl, x, y, 4, 1f, 2f);
+        DrawSprite_Car(gl, x, y, Car_Red_Index, 1f, 2f);
     }
-
+    Ai_Player2 select=new Ai_Player2();
     public void CarBlue(GL gl) {
-        moveALone();
-        DrawSprite_CarForAi(gl, blueX, blueY, 12, 1f, 2f);
+        select.HandlePlayer2();
+        DrawSprite_CarForAi(gl, blueX, blueY, Car_Blue_Index, 1f, 2f);
     }
 
 
@@ -218,7 +262,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 
-    public void DrawSprite(GL gl, int x, int y, int index, float scaleX, float scaleY) {
+    public void DrawSprite(GL gl, double x, double y, int index, float scaleX, float scaleY) {
         gl.glEnable(GL.GL_BLEND);
         gl.glBindTexture(GL.GL_TEXTURE_2D, textures[index]);    // Turn Blending On
 
@@ -242,7 +286,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         gl.glDisable(GL.GL_BLEND);
     }
 
-    public void DrawSprite_Car(GL gl, int x, int y, int index, float scaleX, float scaleY) {
+    public void DrawSprite_Car(GL gl, double x, double y, int index, float scaleX, float scaleY) {
         gl.glEnable(GL.GL_BLEND);
         gl.glBindTexture(GL.GL_TEXTURE_2D, textures[index]);    // Turn Blending On
 
@@ -267,7 +311,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         gl.glDisable(GL.GL_BLEND);
     }
 
-    public void DrawSprite_CarForAi(GL gl, int x, int y, int index, float scaleX, float scaleY) {
+    public void DrawSprite_CarForAi(GL gl, double x, double y, int index, float scaleX, float scaleY) {
         gl.glEnable(GL.GL_BLEND);
         gl.glBindTexture(GL.GL_TEXTURE_2D, textures[index]);    // Turn Blending On
 
@@ -330,47 +374,64 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
                 rotate -= 0.5;
             }
         }
-
     }
 
-    public void moveALone() {
-        if (noChange() == 37) {
-            if (blueX > 14) {
-                blueX--;
-                rotateB += 0.5;
+    class Ai_Player2 {
+
+
+        public void HandlePlayer2(){
+            if (isKeyPressed(KeyEvent.VK_A)) { //37
+                if (blueX > 14) {
+                    blueX--;
+                    rotateB += 0.5;
+                }
+            }
+            if (isKeyPressed(KeyEvent.VK_D)) { //39
+                if (blueX < 75) {
+                    blueX++;
+                    rotateB -= 0.5;
+                }
             }
         }
 
-        if (noChange() == 39) {
-            if (blueX < 75) {
-                blueX++;
-                rotateB -= 0.5;
+        public void moveALone() {
+            if (noChange() == 37) {
+                if (blueX > 14) {
+                    blueX--;
+                    rotateB += 0.5;
+                }
             }
+
+            if (noChange() == 39) {
+                if (blueX < 75) {
+                    blueX++;
+                    rotateB -= 0.5;
+                }
+            }
+            if (currentNumber != 37 && currentNumber != 39) {
+                rotateB = 0;
+            }
+
+
         }
-        if (currentNumber != 37 && currentNumber != 39) {
-            rotateB = 0;
+
+        public static int getRandomNumber() {
+            Random random = new Random();
+            return 37 + random.nextInt(10);
         }
 
+        private static int currentNumber = getRandomNumber(); //35
+        private static int cnt = 0;
 
-    }
-
-    public static int getRandomNumber() {
-        Random random = new Random();
-        return 37 + random.nextInt(10);
-    }
-
-    private static int currentNumber = getRandomNumber(); //35
-    private static int cnt = 0;
-
-    public static int noChange() {
-        if (cnt == 10) {
-            currentNumber = getRandomNumber();
-            cnt = 0;
+        public static int noChange() {
+            if (cnt == 10) {
+                currentNumber = getRandomNumber();
+                cnt = 0;
+            }
+            cnt++;
+            return currentNumber;
         }
-        cnt++;
-        return currentNumber;
     }
-
 
     public BitSet keyBits = new BitSet(256);
 
@@ -386,7 +447,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         int keyCode = event.getKeyCode();
         keyBits.clear(keyCode);
         rotate = 0;
-
+        rotateB=0;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class ZeRacing extends JFrame {
         glcanvas.addGLEventListener(listener);
         glcanvas.addKeyListener((listener));
         getContentPane().add(glcanvas, BorderLayout.CENTER);
-        Animator animator = new FPSAnimator(glcanvas, 40);
+        Animator animator = new FPSAnimator(glcanvas, 60);
         animator.start();
         setTitle("ZeRacing: Speed For Need");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

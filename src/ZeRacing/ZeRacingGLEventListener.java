@@ -47,7 +47,8 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
             ,"HP_Bonus.png","Nitro.png","Finish.png","Menu.png","Instructions.png"
             ,"RedWins.png","BlueWins.png","Draw.png",
             "RedHP100.png","RedHP80.png","RedHP60.png","RedHP40.png","RedHP20.png","RedHP0.png",
-          "BlueHP100.png","BlueHP80.png","BlueHP60.png","BlueHP40.png","BlueHP20.png","BlueHP0.png"
+          "BlueHP100.png","BlueHP80.png","BlueHP60.png","BlueHP40.png","BlueHP20.png","BlueHP0.png",
+            "Back1.png"
     };
     /*
 
@@ -98,7 +99,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     Blue 40% :39
     Blue 20% :40
     Blue 0%  :41
-
+    Back1 button : 42
 
 
      */
@@ -273,18 +274,21 @@ left up (354,884)
             ZeRacing.animator.stop();
             CarSound.stop();
             DrawSprite(gl,45,70,27,10f,10f);
+            DrawSprite(gl,90,10,42,1f,1f);
         }
         if (!isColliding(45, (int)FinishY[0]+110, 60, 40, (int)x, (int)y, 8, 8)
           && isColliding(45, (int)FinishY[0]+110, 60, 40, (int)blueX, (int)blueY, 8, 8)) {
             ZeRacing.animator.stop();
             CarSound.stop();
             DrawSprite(gl,45,70,28,10f,10f);
+            DrawSprite(gl,90,10,42,1f,1f);
         }
         if (isColliding(45, (int)FinishY[0]+110, 60, 40, (int)x, (int)y, 8, 8)
                 && isColliding(45, (int)FinishY[0]+110, 60, 40, (int)blueX, (int)blueY, 8, 8)) {
             ZeRacing.animator.stop();
             CarSound.stop();
             DrawSprite(gl,45,70,29,10f,10f);
+            DrawSprite(gl,90,10,42,1f,1f);
         }
     }
     public void Nitro(GL gl){
@@ -313,6 +317,7 @@ left up (354,884)
                 ZeRacing.animator.stop();
                 CarSound.stop();
                 DrawSprite(gl,45,70,28,10f,10f);
+                DrawSprite(gl,90,10,42,1f,1f);
                 //By Mbappé
             }
             if(y>0) y-=1;
@@ -329,12 +334,10 @@ left up (354,884)
                 ZeRacing.animator.stop();
                 CarSound.stop();
                 DrawSprite(gl,45,70,27,10f,10f);
+                DrawSprite(gl,90,10,42,1f,1f);
                 //by Eslam Rasmy
             }
-<<<<<<< HEAD
             if(blueY>0) blueY-=1;
-=======
->>>>>>> de6fdf0d51f4a6980a5132f28fdb67e674b50fe3
         }
         else isBarrelCollisionActiveBlue = false;
 
@@ -587,19 +590,22 @@ left up (354,884)
             else if (339 <= New_x && New_x <=617 && 881 <= New_y && New_y <= 967) {
                 gameState="Instructions";
             }
-            else if(828 <= New_x && New_x <= 1000 && 1 <= New_y && New_y <= 50){
-                gameState="Back";
-            }
             else if (0 < New_x && New_x < 137 && 0 < New_y && New_y < 136) {
                 System.exit(0);
             }
         }
-        else if (gameState.equals("Back") || gameState.equals("Instructions")) {
+        else if (gameState.equals("Instructions")) {
             if (828 <= New_x && New_x <= 1000 && 1 <= New_y && New_y <= 50) {
                 gameState = "MainMenu";
+                }
+            }
+        else if (gameState.equals("1P_VS_CPU")){
+            if (828 <= New_x && New_x <= 1000 && 1 <= New_y && New_y <= 50) {
+                gameState = "MainMenu";
+                }
             }
         }
-    }
+
     /*
 
      354 <= x <= 600

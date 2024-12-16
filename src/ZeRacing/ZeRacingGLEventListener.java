@@ -21,7 +21,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     double rotateB = 0;
     int randomNumberForSwallow;
     int randomNumberForHP;
-    int randomNumberForNitro;
 
 
     //all attributes taken from animgleventlistener
@@ -101,7 +100,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         }
         randomNumberForSwallow = (int) (Math.random() * (40)) + 20;
         randomNumberForHP = (int) (Math.random() * (40)) + 20;
-        randomNumberForNitro = (int) (Math.random() * (40)) + 20;
     }
 
     /*
@@ -122,6 +120,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
 //        Rock(gl);
         Barrel(gl);
+        Health(gl);
         Start(gl); // Created By : All teammates (so easy)
         Car(gl); // From Initial Project
         CarBlue(gl); // Created by : Magdy alone and From my Perspective it's prefect //Hazem
@@ -138,12 +137,13 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     double[] Tree_movement = {2000}; // 14 second , khaled count it
     //Finish Line ---> 12858
     double[] Barrel_Movement = {250};
-
+    double[] Health_Movement= {1000};
     boolean isBarrelCollisionActiveRed = false;
     boolean isBarrelCollisionActiveBlue=false;
+    boolean isHealthCollisionActiveRed = false;
+    boolean isHealthCollisionActiveBlue=false;
     int Car_Red_Index=17;
     int Car_Blue_Index=12;
-
     public void Barrel(GL gl) {
         Movement_For_Obstacles(gl, randomNumberForSwallow, 10, 1f, 1f, speed[0]+1, 100, 700, 20, Barrel_Movement);
         if(isColliding(randomNumberForSwallow,((int)Barrel_Movement[0]+100),10,10,x,y,10,10)) {
@@ -167,7 +167,23 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
 
     //DRY : don't repeat ur self
     //RY
+    public void Health(GL gl) {
+        Movement_For_Obstacles(gl, randomNumberForHP, 22, 1f, 1f,  speed[0]+1, 300, 700, 20, Health_Movement);
 
+        if(isColliding(randomNumberForHP,((int)Health_Movement[0]-420),10,10,x,y,10,10) ||
+                isColliding(randomNumberForHP,((int)Health_Movement[0]+285),10,10,x,y,10,10)) {
+            if (!isHealthCollisionActiveRed && Car_Red_Index > 17) {
+                Car_Red_Index--;
+                isHealthCollisionActiveRed = true;
+            }
+        } else isHealthCollisionActiveRed = false;
+
+        System.out.println("Health X: "+ randomNumberForHP+ ", Health Y: " +(int)Health_Movement[0]+" , Car X: "+blueX+" , Car Y: "+blueY);
+
+
+
+        if (timer % 1000 == 0) randomNumberForHP = (int) (Math.random() * (50)) + 20;
+    }
     public boolean isColliding(double x1, double y1, double width1, double height1, double x2, double y2, double width2, double height2) {
         return x1 < x2 + width2 &&
                 x1 + width1 > x2 &&

@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ZeRacing extends JFrame {
-   public Animator animator;
+   public static Animator animator;
+
 
     public static void main(String[] args) {
         new ZeRacing();
@@ -16,8 +17,8 @@ public class ZeRacing extends JFrame {
         ZeRacingGLEventListener listener = new ZeRacingGLEventListener();
         GLCanvas glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
-        glcanvas.addKeyListener((listener));
-//        glcanvas.addMouseListener(listener);
+        glcanvas.addKeyListener(listener);
+        glcanvas.addMouseListener(listener);
         getContentPane().add(glcanvas, BorderLayout.CENTER);
          animator = new FPSAnimator(glcanvas, 60);
         animator.start();

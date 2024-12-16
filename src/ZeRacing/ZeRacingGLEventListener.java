@@ -21,7 +21,11 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     double rotateB = 0;
     int randomNumberForSwallow;
     int randomNumberForHP;
+<<<<<<< HEAD
     int randomNumberForOil;
+=======
+
+>>>>>>> 75676e45f04f1a6d4443edc9a6d66ff0f138e70c
 
     //all attributes taken from animgleventlistener
     String[] textureNames = {"Road.png", "RaceLines1.png", "GrassBackground.png", "Start.png"
@@ -50,6 +54,18 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     blue car(60%):14
     blue car(40%):15
     blue car(20%):16
+<<<<<<< HEAD
+=======
+
+    red car(100%):17
+    red car(80%):18
+    red car(60%):19
+    red car(40%):20
+    red car(20%):21
+
+    HP_Bonus:22
+    Nitro:23
+>>>>>>> 75676e45f04f1a6d4443edc9a6d66ff0f138e70c
 
     red car(100%):17
     red car(80%):18
@@ -100,7 +116,10 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
         }
         randomNumberForSwallow = (int) (Math.random() * (40)) + 20;
         randomNumberForHP = (int) (Math.random() * (40)) + 20;
+<<<<<<< HEAD
         randomNumberForOil = (int) (Math.random() * (40)) + 20;
+=======
+>>>>>>> 75676e45f04f1a6d4443edc9a6d66ff0f138e70c
     }
 
     /*
@@ -122,7 +141,10 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
 //        Rock(gl);
         Barrel(gl);
         Health(gl);
+<<<<<<< HEAD
         Oil(gl);
+=======
+>>>>>>> 75676e45f04f1a6d4443edc9a6d66ff0f138e70c
         Start(gl); // Created By : All teammates (so easy)
         Car(gl); // From Initial Project
         CarBlue(gl); // Created by : Magdy alone and From my Perspective it's prefect //Hazem
@@ -140,13 +162,17 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
     //Finish Line ---> 12858
     double[] Barrel_Movement = {250};
     double[] Health_Movement= {1000};
+<<<<<<< HEAD
     double[] Oil_Movement={800};
+=======
+>>>>>>> 75676e45f04f1a6d4443edc9a6d66ff0f138e70c
     boolean isBarrelCollisionActiveRed = false;
     boolean isBarrelCollisionActiveBlue=false;
     boolean isHealthCollisionActiveRed = false;
     boolean isHealthCollisionActiveBlue=false;
     int Car_Red_Index=17;
     int Car_Blue_Index=12;
+<<<<<<< HEAD
     public void Oil(GL gl){
         Movement_For_Obstacles(gl,randomNumberForOil,24,1f,1f,speed[0]+1,100,400,12,Oil_Movement);
         System.out.println("  oil X: "+ randomNumberForOil+ ", oil Y: " +(int)Oil_Movement[0]+" , Car X: "+blueX+" , Car Y: "+blueY);
@@ -170,6 +196,16 @@ public class ZeRacingGLEventListener extends ZeRacingListener {
                 isBarrelCollisionActiveRed = true;
             }
         }
+=======
+    public void Barrel(GL gl) {
+        Movement_For_Obstacles(gl, randomNumberForSwallow, 10, 1f, 1f, speed[0]+1, 100, 700, 20, Barrel_Movement);
+        if(isColliding(randomNumberForSwallow,((int)Barrel_Movement[0]+100),10,10,x,y,10,10)) {
+            if (!isBarrelCollisionActiveRed && Car_Red_Index < 21) {
+                Car_Red_Index++;
+                isBarrelCollisionActiveRed = true;
+            }
+        }
+>>>>>>> 75676e45f04f1a6d4443edc9a6d66ff0f138e70c
         else isBarrelCollisionActiveRed = false;
 
         if(isColliding(randomNumberForSwallow,(int)(Barrel_Movement[0]+80),10,10,blueX,blueY,10,10)) {

@@ -1,24 +1,13 @@
 <component name="libraryTable">
   <library name="lib64">
     <CLASSES>
-<<<<<<< HEAD
-      <root url="file://E:/JOGL/JOGLwin/lib64" />
+      <root url="file://C:/JOGLwin/lib64" />
     </CLASSES>
     <JAVADOC />
     <NATIVE>
-      <root url="file://E:/JOGL/JOGLwin/lib64" />
+      <root url="file://C:/JOGLwin/lib64" />
     </NATIVE>
     <SOURCES />
-    <jarDirectory url="file://E:/JOGL/JOGLwin/lib64" recursive="false" />
-=======
-      <root url="file://$PROJECT_DIR$/../../../../JOGLwin/lib64" />
-    </CLASSES>
-    <JAVADOC />
-    <NATIVE>
-      <root url="file://$PROJECT_DIR$/../../../../JOGLwin/lib64" />
-    </NATIVE>
-    <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/../../../../JOGLwin/lib64" recursive="false" />
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
+    <jarDirectory url="file://C:/JOGLwin/lib64" recursive="false" />
   </library>
 </component>

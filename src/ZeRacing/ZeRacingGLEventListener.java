@@ -19,15 +19,7 @@ import javax.swing.*;
 public class ZeRacingGLEventListener extends ZeRacingListener implements MouseListener,MouseMotionListener {
     /*
     Tasks:
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
-          - Sound (0)
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
           - map   (0) replace grass index with sand index
           -
 
@@ -42,19 +34,9 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     int randomNumberForSwallow;
     int randomNumberForHP;
     int randomNumberForNitro;
-<<<<<<< HEAD
-   static Sound CarSound = new Sound("carSound.wav");
-   static Sound begin = new Sound("coldStart.wav");
+    static Sound CarSound = new Sound("carSound.wav");
+    static Sound begin = new Sound("coldStart.wav");
 
-=======
-<<<<<<< HEAD
-   static Sound CarSound = new Sound("carSound.wav");
-   static Sound begin = new Sound("coldStart.wav");
-
-=======
-    Sound CarSound = new Sound("CarSound.wav");
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
 
 
 
@@ -67,18 +49,8 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
             ,"HP_Bonus.png","Nitro.png","Finish.png","Menu.png","Instructions.png"
             ,"RedWins.png","BlueWins.png","Draw.png",
             "RedHP100.png","RedHP80.png","RedHP60.png","RedHP40.png","RedHP20.png","RedHP0.png",
-<<<<<<< HEAD
             "BlueHP100.png","BlueHP80.png","BlueHP60.png","BlueHP40.png","BlueHP20.png","BlueHP0.png"
             ,"MapSelect.png","Sand.png","grass.png"
-=======
-<<<<<<< HEAD
-            "BlueHP100.png","BlueHP80.png","BlueHP60.png","BlueHP40.png","BlueHP20.png","BlueHP0.png"
-            ,"MapSelect.png","Sand.png","grass.png"
-=======
-          "BlueHP100.png","BlueHP80.png","BlueHP60.png","BlueHP40.png","BlueHP20.png","BlueHP0.png",
-            "Back1.png"
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
     };
     /*
 
@@ -94,7 +66,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     Tree: 9
     Barrel:10
     Oil: 11
-<<<<<<< HEAD
 
     blue car(100%):12
     blue car(80%):13
@@ -134,48 +105,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     MapSelect : 42
     Sand : 43
     grass : 44
-<<<<<<< HEAD
 
-=======
-=======
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
-
-    blue car(100%):12
-    blue car(80%):13
-    blue car(60%):14
-    blue car(40%):15
-    blue car(20%):16
-
-    red car(100%):17
-    red car(80%):18
-    red car(60%):19
-    red car(40%):20
-    red car(20%):21
-
-    HP_Bonus : 22
-    Nitro : 23
-    Finish : 24
-    Background : 25
-    Instructions : 26
-    Red Wins : 27
-    Blue Wins : 28
-    Draw : 29
-
-    Red 100%:30
-    Red 80% :31
-    Red 60% :32
-    Red 40% :33
-    Red 20% :34
-    Red 0%  :35
-
-    Blue 100%:36
-    Blue 80% :37
-    Blue 60% :38
-    Blue 40% :39
-    Blue 20% :40
-    Blue 0%  :41
-    Back1 button : 42
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
 
 
      */
@@ -217,14 +147,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
         randomNumberForSwallow = (int) (Math.random() * (40)) + 20;
         randomNumberForHP = (int) (Math.random() * (40)) + 20;
         randomNumberForNitro = (int) (Math.random() * (40)) + 20;
-<<<<<<< HEAD
         begin.start();
-=======
-<<<<<<< HEAD
-        begin.start();
-=======
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
     }
 
     /*
@@ -236,26 +159,12 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     boolean isPressed_1P_VS_2P=false;
     boolean l=false;
     int cnt=0;
-<<<<<<< HEAD
     public static String gameState = "MainMenu";
     public static String MapSelect = "MapMenu";
     int index_photo=25;
     int index_Map=2;
     boolean isTreeVisible=true;
     // Sand : 43
-=======
-<<<<<<< HEAD
-    public static String gameState = "MainMenu";
-    public static String MapSelect = "MapMenu";
-    int index_photo=25;
-    int index_Map=2;
-    boolean isTreeVisible=true;
-    // Sand : 43
-=======
-    private String gameState = "MainMenu";
-    int index_photo=25;
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
 
     public void display(GLAutoDrawable gld) {
         GL gl = gld.getGL();
@@ -263,31 +172,18 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
         gl.glLoadIdentity();
         System.out.println(New_x + " " + New_y);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-//        System.out.println(New_x + " " + New_y);
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
         switch (gameState) {
             case "MainMenu":
                 DrawSprite(gl, 45, 45, index_photo, 10, 10);
                 break;
             case "1P_VS_CPU":
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
                 if (MapSelect.equals("MapMenu")) {
-                DrawSprite(gl, 45, 45, 42, 10f, 10f);
+                    DrawSprite(gl, 45, 45, 42, 10f, 10f);
                 }
                 else {
-<<<<<<< HEAD
-=======
-                Display_1P_VS_CPU(gl);
+                    Display_1P_VS_CPU(gl);
                 }
-             break;
+                break;
 
             case "1P_VS_2P":
                 if (MapSelect.equals("MapMenu")) {
@@ -305,69 +201,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
                 System.out.println("Unknown game state: " + gameState);
         }
 
-
-        timer += 0.5;
-    }
-    /*
-    ______________________
-     Display_1P_VS_CPU(gl);
-
-    Left_Down_Edge : (370,750)
-    Right_Down_Edge : (583,750)
-    Left_Up_Edge : (378,660)
-    Right_Up_Edge : (588,693)
-    __________________
-    Display 1P Vs 2P
-
-    Left_Down_Edge : (373,785)
-    Right_Down_Edge : (593,817)
-    Left_Up_Edge : (481,785)
-    Right_Up_Edge : (491,850)
-    ___________________
-    Exit Game
-
-    left (0,0)
-    right(137,0)
-
-    left down(0,56)
-    right down(134,56)
-    ____________________
-    instructions
-    left down(354,956)
-    left up (354,884)
-     354 <= x <= 600
-     884 <= y <= 956
-     */
-    public void Display_1P_VS_CPU(GL gl){
-=======
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
-                Display_1P_VS_CPU(gl);
-                }
-             break;
-
-            case "1P_VS_2P":
-                if (MapSelect.equals("MapMenu")) {
-                    DrawSprite(gl, 45, 45, 42, 10f, 10f);
-                } else {
-                    Display_1P_VS_2P(gl);
-                }
-                break;
-
-            case "Instructions":
-                DrawSprite(gl, 45, 45, index_photo + 1, 10, 10); // Render Instructions
-                break;
-
-            default:
-                System.out.println("Unknown game state: " + gameState);
-        }
-<<<<<<< HEAD
-
-=======
-        System.out.println(
-        "Finish X: "+ 45+" , Finish Y: "+FinishY[0]+" ,Red Car X: "+x+" ,Red Car Y: "+y +" ,Blue Car Y: "+blueY+" ,Blue Car X: "+blueX
-        );
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
 
         timer += 0.5;
     }
@@ -406,20 +239,9 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
         Grass(gl);
         WhiteLines(gl);//Created by Mohamed Magdy , idea by:all Teammates , First Touch:Abdulrahman
         theSideLines(gl);//Created by Abdelrahman ,Idea by: By All Teammates
-<<<<<<< HEAD
-       if(isTreeVisible) {Tree(gl);}//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
+        if(isTreeVisible) {Tree(gl);}//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
 //        Rock(gl);
 
-=======
-<<<<<<< HEAD
-       if(isTreeVisible) {Tree(gl);}//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
-//        Rock(gl);
-
-=======
-        Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
-//        Rock(gl);
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
         Barrel(gl);
         Health(gl);
         Start(gl); // Created By : All teammates (so easy)
@@ -437,15 +259,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
         Grass(gl);
         WhiteLines(gl);//Created by Mohamed Magdy , idea by:all Teammates , First Touch:Abdulrahman
         theSideLines(gl);//Created by Abdelrahman ,Idea by: By All Teammates
-<<<<<<< HEAD
         if(isTreeVisible) Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
-=======
-<<<<<<< HEAD
-        if(isTreeVisible) Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
-=======
-        Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
 //        Rock(gl);
         Barrel(gl);
         Health(gl);
@@ -478,11 +292,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     public void Finish(GL gl) {
         Movement_FINISH(gl, 45, 24, 7f, 3f, speed[0] + 2, 100, 10, 1, FinishY);
 
-<<<<<<< HEAD
-        if (isColliding(45, (int)FinishY[0]+110, 70, 40, (int)x, (int)y, 10, 10)
-                &&  !isColliding(45, (int)FinishY[0]+110, 70, 40, (int)blueX, (int)blueY, 10, 10)) {
-=======
-<<<<<<< HEAD
         if (isColliding(45, (int)FinishY[0]+110, 70, 40, (int)x, (int)y, 10, 10)
                 &&  !isColliding(45, (int)FinishY[0]+110, 70, 40, (int)blueX, (int)blueY, 10, 10)) {
             ZeRacing.animator.stop();
@@ -500,56 +309,17 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
             ZeRacing.animator.stop();
             CarSound.stop();
             DrawSprite(gl,45,70,29,10f,10f);
-=======
-        if (isColliding(45, (int)FinishY[0]+110, 60, 40, (int)x, (int)y, 8, 8)
-        &&  !isColliding(45, (int)FinishY[0]+110, 60, 40, (int)blueX, (int)blueY, 8, 8)) {
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
-            ZeRacing.animator.stop();
-            CarSound.stop();
-            DrawSprite(gl,45,70,27,10f,10f);
-            DrawSprite(gl,90,10,42,1f,1f);
-        }
-        if (!isColliding(45, (int)FinishY[0]+110, 70, 40, (int)x, (int)y, 10, 10)
-                && isColliding(45, (int)FinishY[0]+110, 70, 40, (int)blueX, (int)blueY, 10, 10)) {
-            ZeRacing.animator.stop();
-            CarSound.stop();
-            DrawSprite(gl,45,70,28,10f,10f);
-            DrawSprite(gl,90,10,42,1f,1f);
-        }
-        if (isColliding(45, (int)FinishY[0]+110, 70, 40, (int)x, (int)y, 10, 10)
-                && isColliding(45, (int)FinishY[0]+110, 70, 40, (int)blueX, (int)blueY, 10, 10)) {
-            ZeRacing.animator.stop();
-            CarSound.stop();
-            DrawSprite(gl,45,70,29,10f,10f);
-            DrawSprite(gl,90,10,42,1f,1f);
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
         }
     }
     public void Nitro(GL gl){
         Movement_For_Obstacles(gl,randomNumberForNitro,23,1f,1f,speed[0]+2,100,400,12,Nitro_Movement);
 
         if (isColliding(randomNumberForNitro,(int)Nitro_Movement[0]-312,10,10,x,y,8,8)
-<<<<<<< HEAD
                 ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+84,10,10,x,y,8,8)){
             if(y<100) y+=1;
         }
         if (isColliding(randomNumberForNitro,(int)Nitro_Movement[0]-320,10,10,blueX,blueY,8,8)
                 ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+90,10,10,blueX,blueY,8,8)){
-=======
-<<<<<<< HEAD
-                ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+84,10,10,x,y,8,8)){
-            if(y<100) y+=1;
-        }
-        if (isColliding(randomNumberForNitro,(int)Nitro_Movement[0]-320,10,10,blueX,blueY,8,8)
-                ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+90,10,10,blueX,blueY,8,8)){
-=======
-        ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+84,10,10,x,y,8,8)){
-            if(y<100) y+=1;
-        }
-        if (isColliding(randomNumberForNitro,(int)Nitro_Movement[0]-320,10,10,blueX,blueY,8,8)
-        ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+90,10,10,blueX,blueY,8,8)){
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
             if(blueY<100) blueY+=1;
         }
 
@@ -567,10 +337,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
                 ZeRacing.animator.stop();
                 CarSound.stop();
                 DrawSprite(gl,45,70,28,10f,10f);
-<<<<<<< HEAD
-=======
-                DrawSprite(gl,90,10,42,1f,1f);
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
                 //By Mbappé
             }
             if(y>0) y-=1;
@@ -587,10 +353,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
                 ZeRacing.animator.stop();
                 CarSound.stop();
                 DrawSprite(gl,45,70,27,10f,10f);
-<<<<<<< HEAD
-=======
-                DrawSprite(gl,90,10,42,1f,1f);
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
                 //by Eslam Rasmy
             }
             if(blueY>0) blueY-=1;
@@ -636,15 +398,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
         Movement(gl, 3, 88, 9, 1f, 1f,  speed[0]+2, 100, 70, 12, Tree_movement);
     }
     public void Grass(GL gl) {
-<<<<<<< HEAD
         Movement(gl, 2, 88, index_Map, 1.5f, 25f,   speed[0], 100, 50, 20, y1);
-=======
-<<<<<<< HEAD
-        Movement(gl, 2, 88, index_Map, 1.5f, 25f,   speed[0], 100, 50, 20, y1);
-=======
-        Movement(gl, 2, 88, 2, 1.5f, 25f,   speed[0], 100, 50, 20, y1);
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
     }
 
     public void WhiteLines(GL gl) {
@@ -803,14 +557,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
         gl.glPopMatrix();
 
         gl.glDisable(GL.GL_BLEND);
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
     }
     /*
      * KeyListener
@@ -832,16 +579,10 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     }
     double New_x=0;
     double New_y=0;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
     /*
             1p vs cpu:
            358 <= x <= 599
            683 <= y <= 753
-<<<<<<< HEAD
-=======
 
             1p vs 2p:
             361 <= x <= 594
@@ -884,7 +625,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
                 isTreeVisible = false;
             }
         }
-         if (gameState.equals("Instructions")) {
+        if (gameState.equals("Instructions")) {
             if (828 <= New_x && New_x <= 1000 && 1 <= New_y && New_y <= 50) {
                 gameState = "MainMenu";
             }
@@ -929,140 +670,8 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
 
     @Override
     public void mouseMoved(MouseEvent e) {
-    New_x=e.getX();
-    New_y=e.getY();
-    }
-
-    class Ai_Player2 {
-
-
-        public void HandlePlayer2(){
-            if (isKeyPressed(KeyEvent.VK_A)) { //37
-                if (blueX > 14) {
-                    blueX--;
-                    rotateB += 0.5;
-                }
-            }
-            if (isKeyPressed(KeyEvent.VK_D)) { //39
-                if (blueX < 75) {
-                    blueX++;
-                    rotateB -= 0.5;
-=======
-/*
-        1p vs cpu:
-       358 <= x <= 599
-       683 <= y <= 753
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
-
-            1p vs 2p:
-            361 <= x <= 594
-            783 <= y <= 852
-
-            instructions:
-           339 <= x <= 617
-           881 <= y <= 967
-
-     */
-    @Override
-    public void mouseClicked(MouseEvent e) {
         New_x=e.getX();
         New_y=e.getY();
-        if (gameState.equals("MainMenu")) {
-            if (358 <= New_x && New_x <= 599 && 683 <= New_y && New_y <= 753) {
-                gameState = "1P_VS_CPU";
-                MapSelect = "MapMenu";
-            } else if (361 <= New_x && New_x <= 594 && 783 <= New_y && New_y <= 852) {
-                gameState = "1P_VS_2P";
-<<<<<<< HEAD
-                MapSelect = "MapMenu";
-            } else if (339 <= New_x && New_x <= 617 && 881 <= New_y && New_y <= 967) {
-                gameState = "Instructions";
-            } else if (0 < New_x && New_x < 137 && 0 < New_y && New_y < 136) {
-                System.exit(0);
-            }
-        }
-        else if (MapSelect.equals("MapMenu")) {
-            if (82 <= New_x && New_x <= 403 && 776 <= New_y && New_y<=856) {
-                CarSound.start();
-                begin.stop();
-                index_Map = 2;
-                MapSelect = "Selected"; // display 1p vs cpu || 1p vs 2p
-                isTreeVisible = true;
-            } else if (450 <= New_x && New_x <= 768 && 773<=New_y && New_y<=854) {
-                CarSound.start();
-                begin.stop();
-                index_Map = 43;
-                MapSelect = "Selected";
-                isTreeVisible = false;
-            }
-        }
-         if (gameState.equals("Instructions")) {
-=======
-            }
-            else if (339 <= New_x && New_x <=617 && 881 <= New_y && New_y <= 967) {
-                gameState="Instructions";
-            }
-            else if (0 < New_x && New_x < 137 && 0 < New_y && New_y < 136) {
-                System.exit(0);
-            }
-        }
-        else if (gameState.equals("Instructions")) {
->>>>>>> 0cbf1f802ea51d0697d42e70ea175b6d7c1c4445
-            if (828 <= New_x && New_x <= 1000 && 1 <= New_y && New_y <= 50) {
-                gameState = "MainMenu";
-                }
-            }
-        else if (gameState.equals("1P_VS_CPU")){
-            if (828 <= New_x && New_x <= 1000 && 1 <= New_y && New_y <= 50) {
-                gameState = "MainMenu";
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
-                }
-            }
-        }
-
-<<<<<<< HEAD
-=======
-    /*
-
-     354 <= x <= 600
-     884 <= y <= 956
-
-     828 <= x <= 1000
-        1 <= y <= 50
-
-       358 <= x <= 599
-       683 <= y <= 753
-     */
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-    New_x=e.getX();
-    New_y=e.getY();
     }
 
     class Ai_Player2 {
@@ -1083,7 +692,6 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
             }
         }
 
->>>>>>> 676f959414c91337765567ee9a2890da8c026ecc
         public void moveALone() {
             if (noChange() == 37) {
                 if (blueX > 14) {

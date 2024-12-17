@@ -19,7 +19,7 @@ import javax.swing.*;
 public class ZeRacingGLEventListener extends ZeRacingListener implements MouseListener,MouseMotionListener {
     /*
     Tasks:
-          - Sound (0)
+
           - map   (0) replace grass index with sand index
           -
 
@@ -34,7 +34,9 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     int randomNumberForSwallow;
     int randomNumberForHP;
     int randomNumberForNitro;
-    Sound CarSound = new Sound("CarSound.wav");
+   static Sound CarSound = new Sound("carSound.wav");
+   static Sound begin = new Sound("coldStart.wav");
+
 
 
 
@@ -47,7 +49,8 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
             ,"HP_Bonus.png","Nitro.png","Finish.png","Menu.png","Instructions.png"
             ,"RedWins.png","BlueWins.png","Draw.png",
             "RedHP100.png","RedHP80.png","RedHP60.png","RedHP40.png","RedHP20.png","RedHP0.png",
-          "BlueHP100.png","BlueHP80.png","BlueHP60.png","BlueHP40.png","BlueHP20.png","BlueHP0.png"
+            "BlueHP100.png","BlueHP80.png","BlueHP60.png","BlueHP40.png","BlueHP20.png","BlueHP0.png"
+            ,"MapSelect.png","Sand.png","grass.png"
     };
     /*
 
@@ -99,6 +102,10 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     Blue 20% :40
     Blue 0%  :41
 
+    MapSelect : 42
+    Sand : 43
+    grass : 44
+
 
 
      */
@@ -140,6 +147,7 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
         randomNumberForSwallow = (int) (Math.random() * (40)) + 20;
         randomNumberForHP = (int) (Math.random() * (40)) + 20;
         randomNumberForNitro = (int) (Math.random() * (40)) + 20;
+        begin.start();
     }
 
     /*
@@ -151,73 +159,89 @@ public class ZeRacingGLEventListener extends ZeRacingListener implements MouseLi
     boolean isPressed_1P_VS_2P=false;
     boolean l=false;
     int cnt=0;
-    private String gameState = "MainMenu";
+    public static String gameState = "MainMenu";
+    public static String MapSelect = "MapMenu";
     int index_photo=25;
+    int index_Map=2;
+    boolean isTreeVisible=true;
+    // Sand : 43
 
     public void display(GLAutoDrawable gld) {
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         gl.glLoadIdentity();
+        System.out.println(New_x + " " + New_y);
 
-//        System.out.println(New_x + " " + New_y);
         switch (gameState) {
             case "MainMenu":
                 DrawSprite(gl, 45, 45, index_photo, 10, 10);
                 break;
             case "1P_VS_CPU":
+                if (MapSelect.equals("MapMenu")) {
+                DrawSprite(gl, 45, 45, 42, 10f, 10f);
+                }
+                else {
                 Display_1P_VS_CPU(gl);
-                break;
+                }
+             break;
+
             case "1P_VS_2P":
-                Display_1P_VS_2P(gl);
+                if (MapSelect.equals("MapMenu")) {
+                    DrawSprite(gl, 45, 45, 42, 10f, 10f);
+                } else {
+                    Display_1P_VS_2P(gl);
+                }
                 break;
+
             case "Instructions":
-                DrawSprite(gl,45,45,index_photo+1,10,10);
+                DrawSprite(gl, 45, 45, index_photo + 1, 10, 10); // Render Instructions
                 break;
+
             default:
-                System.out.println();
+                System.out.println("Unknown game state: " + gameState);
         }
-        System.out.println(
-        "Finish X: "+ 45+" , Finish Y: "+FinishY[0]+" ,Red Car X: "+x+" ,Red Car Y: "+y +" ,Blue Car Y: "+blueY+" ,Blue Car X: "+blueX
-        );
+
 
         timer += 0.5;
     }
-/*
-______________________
- Display_1P_VS_CPU(gl);
+    /*
+    ______________________
+     Display_1P_VS_CPU(gl);
 
-Left_Down_Edge : (370,750)
-Right_Down_Edge : (583,750)
-Left_Up_Edge : (378,660)
-Right_Up_Edge : (588,693)
-__________________
-Display 1P Vs 2P
+    Left_Down_Edge : (370,750)
+    Right_Down_Edge : (583,750)
+    Left_Up_Edge : (378,660)
+    Right_Up_Edge : (588,693)
+    __________________
+    Display 1P Vs 2P
 
-Left_Down_Edge : (373,785)
-Right_Down_Edge : (593,817)
-Left_Up_Edge : (481,785)
-Right_Up_Edge : (491,850)
-___________________
-Exit Game
+    Left_Down_Edge : (373,785)
+    Right_Down_Edge : (593,817)
+    Left_Up_Edge : (481,785)
+    Right_Up_Edge : (491,850)
+    ___________________
+    Exit Game
 
-left (0,0)
-right(137,0)
+    left (0,0)
+    right(137,0)
 
-left down(0,56)
-right down(134,56)
-____________________
-instructions
-left down(354,956)
-left up (354,884)
- 354 <= x <= 600
- 884 <= y <= 956
- */
+    left down(0,56)
+    right down(134,56)
+    ____________________
+    instructions
+    left down(354,956)
+    left up (354,884)
+     354 <= x <= 600
+     884 <= y <= 956
+     */
     public void Display_1P_VS_CPU(GL gl){
+
         Grass(gl);
         WhiteLines(gl);//Created by Mohamed Magdy , idea by:all Teammates , First Touch:Abdulrahman
         theSideLines(gl);//Created by Abdelrahman ,Idea by: By All Teammates
-        Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
+       if(isTreeVisible) {Tree(gl);}//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
 //        Rock(gl);
+
         Barrel(gl);
         Health(gl);
         Start(gl); // Created By : All teammates (so easy)
@@ -235,7 +259,7 @@ left up (354,884)
         Grass(gl);
         WhiteLines(gl);//Created by Mohamed Magdy , idea by:all Teammates , First Touch:Abdulrahman
         theSideLines(gl);//Created by Abdelrahman ,Idea by: By All Teammates
-        Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
+        if(isTreeVisible) Tree(gl);//FirstTouch: By Hazem , Idea by : Abdulrahman , Edited by : all Teammates
 //        Rock(gl);
         Barrel(gl);
         Health(gl);
@@ -268,20 +292,20 @@ left up (354,884)
     public void Finish(GL gl) {
         Movement_FINISH(gl, 45, 24, 7f, 3f, speed[0] + 2, 100, 10, 1, FinishY);
 
-        if (isColliding(45, (int)FinishY[0]+110, 60, 40, (int)x, (int)y, 8, 8)
-        &&  !isColliding(45, (int)FinishY[0]+110, 60, 40, (int)blueX, (int)blueY, 8, 8)) {
+        if (isColliding(45, (int)FinishY[0]+110, 70, 40, (int)x, (int)y, 10, 10)
+                &&  !isColliding(45, (int)FinishY[0]+110, 70, 40, (int)blueX, (int)blueY, 10, 10)) {
             ZeRacing.animator.stop();
             CarSound.stop();
             DrawSprite(gl,45,70,27,10f,10f);
         }
-        if (!isColliding(45, (int)FinishY[0]+110, 60, 40, (int)x, (int)y, 8, 8)
-          && isColliding(45, (int)FinishY[0]+110, 60, 40, (int)blueX, (int)blueY, 8, 8)) {
+        if (!isColliding(45, (int)FinishY[0]+110, 70, 40, (int)x, (int)y, 10, 10)
+                && isColliding(45, (int)FinishY[0]+110, 70, 40, (int)blueX, (int)blueY, 10, 10)) {
             ZeRacing.animator.stop();
             CarSound.stop();
             DrawSprite(gl,45,70,28,10f,10f);
         }
-        if (isColliding(45, (int)FinishY[0]+110, 60, 40, (int)x, (int)y, 8, 8)
-                && isColliding(45, (int)FinishY[0]+110, 60, 40, (int)blueX, (int)blueY, 8, 8)) {
+        if (isColliding(45, (int)FinishY[0]+110, 70, 40, (int)x, (int)y, 10, 10)
+                && isColliding(45, (int)FinishY[0]+110, 70, 40, (int)blueX, (int)blueY, 10, 10)) {
             ZeRacing.animator.stop();
             CarSound.stop();
             DrawSprite(gl,45,70,29,10f,10f);
@@ -291,11 +315,11 @@ left up (354,884)
         Movement_For_Obstacles(gl,randomNumberForNitro,23,1f,1f,speed[0]+2,100,400,12,Nitro_Movement);
 
         if (isColliding(randomNumberForNitro,(int)Nitro_Movement[0]-312,10,10,x,y,8,8)
-        ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+84,10,10,x,y,8,8)){
+                ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+84,10,10,x,y,8,8)){
             if(y<100) y+=1;
         }
         if (isColliding(randomNumberForNitro,(int)Nitro_Movement[0]-320,10,10,blueX,blueY,8,8)
-        ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+90,10,10,blueX,blueY,8,8)){
+                ||  isColliding(randomNumberForNitro,(int)Nitro_Movement[0]+90,10,10,blueX,blueY,8,8)){
             if(blueY<100) blueY+=1;
         }
 
@@ -331,10 +355,7 @@ left up (354,884)
                 DrawSprite(gl,45,70,27,10f,10f);
                 //by Eslam Rasmy
             }
-<<<<<<< HEAD
             if(blueY>0) blueY-=1;
-=======
->>>>>>> de6fdf0d51f4a6980a5132f28fdb67e674b50fe3
         }
         else isBarrelCollisionActiveBlue = false;
 
@@ -377,7 +398,7 @@ left up (354,884)
         Movement(gl, 3, 88, 9, 1f, 1f,  speed[0]+2, 100, 70, 12, Tree_movement);
     }
     public void Grass(GL gl) {
-        Movement(gl, 2, 88, 2, 1.5f, 25f,   speed[0], 100, 50, 20, y1);
+        Movement(gl, 2, 88, index_Map, 1.5f, 25f,   speed[0], 100, 50, 20, y1);
     }
 
     public void WhiteLines(GL gl) {
@@ -536,6 +557,7 @@ left up (354,884)
         gl.glPopMatrix();
 
         gl.glDisable(GL.GL_BLEND);
+
     }
     /*
      * KeyListener
@@ -557,44 +579,53 @@ left up (354,884)
     }
     double New_x=0;
     double New_y=0;
-/*
-        1p vs cpu:
-       358 <= x <= 599
-       683 <= y <= 753
+    /*
+            1p vs cpu:
+           358 <= x <= 599
+           683 <= y <= 753
 
-        1p vs 2p:
-        361 <= x <= 594
-        783 <= y <= 852
+            1p vs 2p:
+            361 <= x <= 594
+            783 <= y <= 852
 
-        instructions:
-       339 <= x <= 617
-       881 <= y <= 967
+            instructions:
+           339 <= x <= 617
+           881 <= y <= 967
 
- */
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
-        New_x = e.getX();
-        New_y = e.getY();
+        New_x=e.getX();
+        New_y=e.getY();
         if (gameState.equals("MainMenu")) {
             if (358 <= New_x && New_x <= 599 && 683 <= New_y && New_y <= 753) {
-                CarSound.start();
                 gameState = "1P_VS_CPU";
-            }
-            else if (361 <= New_x && New_x <= 594 && 783 <= New_y && New_y <= 852) {
-                CarSound.start();
+                MapSelect = "MapMenu";
+            } else if (361 <= New_x && New_x <= 594 && 783 <= New_y && New_y <= 852) {
                 gameState = "1P_VS_2P";
-            }
-            else if (339 <= New_x && New_x <=617 && 881 <= New_y && New_y <= 967) {
-                gameState="Instructions";
-            }
-            else if(828 <= New_x && New_x <= 1000 && 1 <= New_y && New_y <= 50){
-                gameState="Back";
-            }
-            else if (0 < New_x && New_x < 137 && 0 < New_y && New_y < 136) {
+                MapSelect = "MapMenu";
+            } else if (339 <= New_x && New_x <= 617 && 881 <= New_y && New_y <= 967) {
+                gameState = "Instructions";
+            } else if (0 < New_x && New_x < 137 && 0 < New_y && New_y < 136) {
                 System.exit(0);
             }
         }
-        else if (gameState.equals("Back") || gameState.equals("Instructions")) {
+        else if (MapSelect.equals("MapMenu")) {
+            if (82 <= New_x && New_x <= 403 && 776 <= New_y && New_y<=856) {
+                CarSound.start();
+                begin.stop();
+                index_Map = 2;
+                MapSelect = "Selected"; // display 1p vs cpu || 1p vs 2p
+                isTreeVisible = true;
+            } else if (450 <= New_x && New_x <= 768 && 773<=New_y && New_y<=854) {
+                CarSound.start();
+                begin.stop();
+                index_Map = 43;
+                MapSelect = "Selected";
+                isTreeVisible = false;
+            }
+        }
+         if (gameState.equals("Instructions")) {
             if (828 <= New_x && New_x <= 1000 && 1 <= New_y && New_y <= 50) {
                 gameState = "MainMenu";
             }
@@ -639,7 +670,8 @@ left up (354,884)
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
+    New_x=e.getX();
+    New_y=e.getY();
     }
 
     class Ai_Player2 {

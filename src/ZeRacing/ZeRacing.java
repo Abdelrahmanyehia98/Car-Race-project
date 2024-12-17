@@ -4,9 +4,11 @@ import com.sun.opengl.util.*;
 import javax.media.opengl.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ZeRacing extends JFrame {
-   public static Animator animator;
+    public static Animator animator;
 
 
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class ZeRacing extends JFrame {
         glcanvas.addKeyListener(listener);
         glcanvas.addMouseListener(listener);
         getContentPane().add(glcanvas, BorderLayout.CENTER);
-         animator = new FPSAnimator(glcanvas, 60);
+        animator = new FPSAnimator(glcanvas, 60);
         animator.start();
         setTitle("ZeRacing: Speed For Need");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,8 +31,5 @@ public class ZeRacing extends JFrame {
         setVisible(true);
         setFocusable(true);
         glcanvas.requestFocus();
-    }
-    public Animator anim(){
-        return animator;
     }
 }
